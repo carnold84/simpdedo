@@ -1,0 +1,63 @@
+$list-item-height: 50px;
+
+.list-item {
+
+    width: 100%;
+    height: $list-item-height;
+    list-style: none;
+    float: left;
+    clear: left;
+    border-bottom: $list-item-border dashed 1px;
+    overflow: hidden;
+    transition: margin-left 200ms linear, opacity 200ms linear;
+    border-left: $btn-primary-bg-colour solid 3px;
+
+    &.selected {
+
+        background-color: $list-item-bg_SELECTED;
+    }
+
+    .checkbox {
+
+        width: $list-item-height;
+        height: $list-item-height;
+        float: left;
+    }
+
+    .text {
+
+        width: calc(100% - #{($list-item-height * 2)});
+        height: 100%;
+        font-family: $textFontStack;
+        font-size: 14px;
+        color: $list-item-colour;
+        line-height: 18px;
+        float: left;
+        padding: 15px 0 0 15px;
+    }
+
+    .btn {
+
+        width: $list-item-height;
+        height: #{$list-item-height - 1};
+        font-size: 1.1em;
+        text-decoration: none;
+        float: left;
+        padding: 17px 0 0 18px;
+        border-left: $list-item-border dashed 1px;
+        color: $list-item-btn-colour;
+
+        &:hover {
+
+            background-color: $list-item-btn-bg-colour_HOVER;
+        }
+    }
+
+    &.has-checkbox {
+
+        .text {
+
+            width: calc(100% - ($list-item-height * 3));
+        }
+    }
+}

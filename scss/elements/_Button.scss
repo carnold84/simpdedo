@@ -1,0 +1,38 @@
+.ui-button {
+    
+    height: 26px;
+    font-family: $textFontStack;
+    font-size: 1em;
+    line-height: 1.1em;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 13px;
+    padding: 6px 15px;
+    display: table-cell;
+}
+
+.primary-btn {
+
+    color: $btn-primary-text-colour;
+    background-color: $btn-primary-bg-colour;
+    border: #325a73 solid 1px;
+
+    :hover {
+        
+        background-color: $btn-primary-bg-colour_HOVER;
+    }
+}
+
+.secondary-btn {
+
+    color: $btn-secondary-text-colour;
+    margin: 0 10px 0 0;
+    background-color: $btn-secondary-bg-colour;
+    border: $btn-secondary-bg-colour solid 1px;
+
+    :hover {
+        
+        background-color: $btn-secondary-bg-colour_HOVER;
+    }
+}

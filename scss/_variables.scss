@@ -1,0 +1,48 @@
+// COLOURS
+$white: #ffffff;
+$black: #000000;
+$main-colour: #262A2D;
+$background: $main-colour;
+
+// FONTS
+$titleFontStack: 'MontserratRegular', Arial, Helvetica, Verdana, sans-serif;
+$textFontStack: 'OpenSansBold', Arial, Helvetica, Verdana, sans-serif;
+$iconFontStack: 'FontAwesome', Arial, Helvetica, Verdana, sans-serif;
+$baseFontSize: 1em;
+$buttonFontSize: 0.9em;
+$buttonLineHeight: 1.2em;
+$text-light-grey: lighten(#333333, 30);
+
+// WIDTHS
+$column-narrow: 350px;
+
+$btn-primary-text-colour: #ffffff;
+$btn-primary-bg-colour: #39809a;
+$btn-primary-bg-colour_HOVER: #4795b2;
+$btn-secondary-text-colour: #999999;
+$btn-secondary-bg-colour: #333333;
+$btn-secondary-bg-colour_HOVER: #444444;
+
+$header-bg-colour: $main-colour;
+$header-text-colour: lighten($main-colour, 30);
+$column-1: $main-colour;
+$column-1-header: darken($column-1, 3);
+$column-header-btn-text-colour: $btn-primary-text-colour;
+$column-header-btn-bg-colour: $btn-primary-bg-colour;
+$column-header-btn-bg-colour_HOVER: $btn-primary-bg-colour_HOVER;
+$column-2: darken($column-1, 2);
+$column-2-header: darken($column-2, 3);
+$column-3: darken($column-2, 2);
+
+$list-item-colour: lighten($main-colour, 30);
+$list-item-border: darken($main-colour, 5);
+$list-item-bg_SELECTED: darken($main-colour, 4);
+$list-item-btn-colour: lighten($main-colour, 12);
+$list-item-btn-bg-colour_HOVER: lighten($main-colour, 1);
+
+$dialog-width: 500px;
+$dialog-bg-colour: darken($main-colour, 5);
+
+$text-input-bg-colour: $white;
+$text-input-border-colour: $white;
+$text-input-border-colour_FOCUSED: $white;

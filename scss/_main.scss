@@ -1,0 +1,165 @@
+/* ==========================================================================
+   General Classes
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+    background-color: $background;
+}
+
+h1, h2, h3 {
+    font-family: $titleFontStack;
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+}
+
+#wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+/*#header {
+    width: 100%;
+    height: 40px;
+    float: left;
+    background-color: #387498;
+    border-bottom: #325a73 solid 1px;
+}*/
+
+#header {
+    width: 100%;
+    height: 40px;
+    float: left;
+    background-color: $header-bg-colour;
+    border-bottom: $header-bg-colour solid 1px;
+}
+
+#main {
+    width: 100%;
+    height: calc(100% - 40px);
+    float: left;
+}
+
+.main-title {
+    font-size: 17px;
+    text-transform: uppercase;
+    color: $text-light-grey;
+    float: left;
+    margin: 10px 0 0 15px;
+}
+
+.column-1, .column-2, .column-3 {
+    float: left;
+    height: 100%;
+
+    .list {
+        height: calc(100% - 40px);
+    }
+}
+
+.column-1, .column-2 {
+    width: $column-narrow;
+}
+
+.column-1 {
+
+    background-color: $column-1;
+
+    .column-header {
+
+        background-color: $column-1-header;
+        border-bottom: $column-1-header solid 1px;
+    }
+}
+
+.column-2 {
+
+    background-color: $column-2;
+
+    .column-header {
+
+        background-color: $column-2-header;
+        border-bottom: $column-2-header solid 1px;
+    }
+}
+
+.column-3 {
+
+    width: calc(100% - #{$column-narrow * 2});
+    background-color: $column-3;
+
+    .column-header {
+
+        background-color: $column-1-header;
+        border-bottom: $column-1-header solid 1px;
+    }
+}
+
+.column-header {
+
+    position: relative;
+    width: 100%;
+    height: 40px;
+    float: left;
+    background-color: $column-1-header;
+    border-bottom: $column-1-header solid 1px;
+
+    h3 {
+
+        color: $header-text-colour;
+        font-size: 1rem;
+        float: left;
+        margin: 10px 0 0 15px;
+    }
+
+    .ui-button {
+
+        color: $column-header-btn-text-colour;
+        float: right;
+        margin: 7px 7px 0 0;
+        background-color: $column-header-btn-bg-colour;
+
+        :hover {
+            
+            background-color: $column-header-btn-bg-colour_HOVER;
+        }
+    }
+}
+
+#info, #create-task {
+    width: 100%;
+    float: left;
+    padding: 25px;
+}
+
+#task-title {
+    font-size: 24px;
+}
+
+#task-title, #task-notes {
+    padding: 10px;
+}
+
+.info-title {
+    font-size: 38px;
+    color: #666666;
+    text-transform: uppercase;
+}
+
+.info-text {
+    font-family: $textFontStack;
+    font-size: 14px;
+    color: #666666;
+}
+
+/*
+    HELPER CLASSES
+*/
+.remove {
+    display: none !important;
+}

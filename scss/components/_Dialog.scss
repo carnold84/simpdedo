@@ -1,0 +1,55 @@
+/* ==========================================================================
+   Dialog Classes
+   ========================================================================== */
+.dialog {
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+
+    .inner {
+
+        position: absolute;
+        width: $dialog-width;
+        top: 200px;
+        left: 50%;
+        margin-left: -#{$dialog-width / 2};
+        padding: 20px;
+        background-color: $dialog-bg-colour;
+    }
+
+    .button-row {
+
+        width: 100%;
+        float: left;
+
+        .primary-btn, .secondary-btn {
+
+            float: right;
+        }
+    }
+
+    .text-input, .textarea {
+
+        width: 100%;
+        padding: 10px;
+        margin: 0 0 10px;
+        border: #ffffff solid 1px;
+        background-color: $text-input-bg-colour;
+
+        :active {
+
+            box-shadow: 3px 0px rgba(0, 0, 0, 0.25);
+            background-color: $text-input-border-colour_FOCUSED;
+        }
+
+        :active {
+
+            box-shadow: 3px 0px rgba(0, 0, 0, 0.25);
+            background-color: $text-input-border-colour_FOCUSED;
+        }
+    }
+}
