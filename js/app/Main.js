@@ -1,6 +1,6 @@
 // define dependent files
-define(['utilities/Broadcast', 'utilities/Templates', 'utilities/Strings', 'managers/Data', 'components/Dialog', 'components/Info', 'components/List', 'components/ListItem', 'elements/TextInput', 'elements/Textarea'], 
-    function(Broadcast, Templates, Strings, DataManager, UIDialog, UIInfo, UIList, UIListItem, UITextInput, UITextarea) {
+define(['utilities/DOM', 'utilities/Broadcast', 'utilities/Templates', 'utilities/Strings', 'managers/Data', 'components/Dialog', 'components/Info', 'components/List', 'components/ListItem', 'elements/TextInput', 'elements/Textarea'], 
+    function(DOM, Broadcast, Templates, Strings, DataManager, UIDialog, UIInfo, UIList, UIListItem, UITextInput, UITextarea) {
 
     'use strict';
 
@@ -116,15 +116,13 @@ define(['utilities/Broadcast', 'utilities/Templates', 'utilities/Strings', 'mana
         updateProjects();
     }
 
-    function onDialogSubmit (data) {
+    function onDialogSubmit (id, fields) {
 
-        var type = data.id === 'task' ? DataManager.TYPES.TASK : DataManager.TYPES.PROJECT,
-            uuid = (data.fields.uuid !== undefined && Strings.isNotEmpty(data.fields.uuid.getValue())) ? data.fields.uuid.getValue() : undefined,
-            title = (data.fields.title !== undefined && Strings.isNotEmpty(data.fields.title.getValue())) ? data.fields.title.getValue() : undefined,
-            notes = (data.fields.notes !== undefined && Strings.isNotEmpty(data.fields.notes.getValue())) ? data.fields.notes.getValue() : undefined;
+        var type = id === 'task' ? DataManager.TYPES.TASK : DataManager.TYPES.PROJECT,
+            uuid = (fields.uuid !== undefined && Strings.isNotEmpty(fields.uuid.getValue())) ? fields.uuid.getValue() : undefined,
+            title = (fields.title !== undefined && Strings.isNotEmpty(fields.title.getValue())) ? fields.title.getValue() : undefined,
+            notes = (fields.notes !== undefined && Strings.isNotEmpty(fields.notes.getValue())) ? fields.notes.getValue() : undefined;
 
-        console.log(notes);
-        
         DataManager.saveItem(uuid, type, title, notes, 0);
 
         createProjectDialog.hide();
@@ -150,9 +148,23 @@ define(['utilities/Broadcast', 'utilities/Templates', 'utilities/Strings', 'mana
         }
     }
 
-    function onItemUpdated (uuid) {
+    function onItemUpdated (data) {
 
-        updateItem(DataManager.getProjectByUUID(uuid), projectsList);
+        switch (data.type) {
+
+            case DataManager.TYPES.PROJECT:
+        
+                updateItem(DataManager.getProjectByUUID(data.uuid), projectsList);
+                break;
+
+            case DataManager.TYPES.TASK:
+        
+                updateItem(DataManager.getTaskByUUID(data.uuid), tasksList);
+                break;
+
+            default:
+                break;
+        }
     }
 
     function addItem (data, list) {
@@ -191,7 +203,7 @@ define(['utilities/Broadcast', 'utilities/Templates', 'utilities/Strings', 'mana
 
     function updateItem (data, list) {
 
-        var item = projects[data.uuid],
+        var item = data.type === DataManager.TYPES.PROJECT ? projects[data.uuid] : tasks[data.uuid],
             item_data = UIListItem.data();
 
         item_data.uuid = data.uuid;

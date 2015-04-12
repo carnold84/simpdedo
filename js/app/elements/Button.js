@@ -4,19 +4,24 @@ define(function() {
     'use strict';
 
     var TYPE = {
-            PRIMARY : 'primary-btn',
-            SECONDARY : 'secondary-btn'
+            PRIMARY : 'ui-btn--primary',
+            SECONDARY : 'ui-btn--secondary'
+        },
+        ALIGNMENT = {
+            NONE : 'ui-btn--none',
+            LEFT : 'ui-btn--left',
+            RIGHT : 'ui-btn--right'
         };
 
     function Button (desc) {
 
         this.label = desc.label;
         this.type = desc.type;
+        this.alignment = desc.alignment !== undefined ? desc.alignment : ALIGNMENT.LEFT; // default alignment is left
         this.callback = desc.callback;
 
         this.el = document.createElement('button');
-        this.el.classList.add('ui-button');
-        this.el.classList.add(this.type);
+        this.el.classList.addMany('ui-btn ui-btn--button ' + this.type + ' ' + this.alignment);
 
         if (this.label !== undefined) {
             this.el.textContent = this.label;
@@ -40,6 +45,7 @@ define(function() {
     return {
 
         TYPES : TYPE,
+        ALIGNMENT : ALIGNMENT,
 
         create : function(type, callback) {
             return new Button(type, callback);

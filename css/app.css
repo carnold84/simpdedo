@@ -2001,7 +2001,7 @@ h1, h2, h3 {
   src: url("../fonts/open_sans/OpenSans-BlackItalic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/open_sans/OpenSans-BlackItalic-webfont.woff") format("woff"), url("../fonts/open_sans/OpenSans-BlackItalic-webfont.ttf") format("truetype"), url("../fonts/open_sans/OpenSans-BlackItalic-webfont.svg#OpenSansBlackItalic") format("svg");
   font-weight: normal;
   font-style: normal; }
-.ui-button {
+.ui-btn {
   height: 26px;
   font-family: "OpenSansBold", Arial, Helvetica, Verdana, sans-serif;
   font-size: 1em;
@@ -2010,22 +2010,34 @@ h1, h2, h3 {
   text-align: center;
   vertical-align: middle;
   border-radius: 13px;
-  padding: 6px 15px;
+  padding: 0 15px;
   display: table-cell; }
 
-.primary-btn {
+.ui-btn--left {
+  float: left; }
+
+.ui-btn--right {
+  float: right; }
+
+.ui-btn--none {
+  float: none; }
+
+.ui-btn--button {
+  line-height: 0.9em; }
+
+.ui-btn--primary {
   color: #ffffff;
   background-color: #39809a;
   border: #325a73 solid 1px; }
-  .primary-btn :hover {
+  .ui-btn--primary :hover {
     background-color: #4795b2; }
 
-.secondary-btn {
+.ui-btn--secondary {
   color: #999999;
   margin: 0 10px 0 0;
   background-color: #333333;
   border: #333333 solid 1px; }
-  .secondary-btn :hover {
+  .ui-btn--secondary :hover {
     background-color: #444444; }
 
 .list {
@@ -2095,8 +2107,6 @@ h1, h2, h3 {
   .dialog .button-row {
     width: 100%;
     float: left; }
-    .dialog .button-row .primary-btn, .dialog .button-row .secondary-btn {
-      float: right; }
   .dialog .text-input, .dialog .textarea {
     width: 100%;
     padding: 10px;

@@ -48,12 +48,14 @@ define(['elements/Button'], function(UIButton) {
         this.submitButton = UIButton.create({
             label : 'Create',
             type : UIButton.TYPES.PRIMARY,
+            alignment : UIButton.ALIGNMENT.RIGHT,
             callback : this.submit.bind(this)
         });
 
         this.cancelButton = UIButton.create({
             label : 'Cancel',
             type : UIButton.TYPES.SECONDARY,
+            alignment : UIButton.ALIGNMENT.RIGHT,
             callback : this.cancel.bind(this)
         });
 
@@ -66,7 +68,7 @@ define(['elements/Button'], function(UIButton) {
 
     Dialog.prototype.submit = function() {
 
-        this.onSubmitCallback(this, this.fields);
+        this.onSubmitCallback(this.id, this.fields);
     }
 
     Dialog.prototype.cancel = function() {
@@ -75,6 +77,19 @@ define(['elements/Button'], function(UIButton) {
     }
 
     Dialog.prototype.show = function(data) {
+
+        var field;
+
+        if (data !== undefined) {
+
+            for (field in data) {
+
+                this.fields[field].setValue(data[field]);
+            }
+        } else {
+
+            this.reset();
+        }
 
         this.el.classList.remove('remove');
     }
@@ -87,6 +102,15 @@ define(['elements/Button'], function(UIButton) {
     }
 
     Dialog.prototype.reset = function() {
+
+        var field;
+
+        for (field in this.fields) {
+
+            console.log(field);
+
+            this.fields[field].setValue('');
+        }
     }
 
     Dialog.prototype.destroy = function() {

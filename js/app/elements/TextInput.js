@@ -31,7 +31,7 @@ define(function() {
 
         this.setAttr('type', this.type);
         this.setAttr('placeholder', this.placeholder);
-        this.setAttr('value', this.value);
+        this.setAttr('value', this.val);
         this.setAttr('name', this.name);
         this.setAttr('maxlength', this.maxlength);
 
@@ -51,6 +51,13 @@ define(function() {
         this.val = this.el.value;
 
         return this.val;
+    }
+
+    TextInput.prototype.setValue = function(value) {
+
+        this.val = value;
+        
+        this.el.value = this.val !== undefined ? this.val : '';
     }
 
     TextInput.prototype.reset = function() {

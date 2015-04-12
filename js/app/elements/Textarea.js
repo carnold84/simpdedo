@@ -44,6 +44,13 @@ define(function() {
         return this.val;
     }
 
+    Textarea.prototype.setValue = function(value) {
+
+        this.val = value;
+        
+        this.el.value = this.val;
+    }
+
     Textarea.prototype.destroy = function() {
 
         this.el = undefined;

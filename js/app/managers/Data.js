@@ -27,7 +27,7 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
     function saveItem (uuid, type, title, notes, status) {
 
         var item,
-            event;
+            evt;
 
         if (uuid !== undefined) {
 
@@ -46,7 +46,7 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
                     break;
             }
 
-            event = EVENT.ITEM_UPDATED;
+            evt = EVENT.ITEM_UPDATED;
 
         } else {
 
@@ -58,7 +58,7 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
 
             item.type = type;
 
-            event = EVENT.ITEM_SAVED;
+            evt = EVENT.ITEM_SAVED;
         }
 
         item.modified = Date.now();
@@ -101,7 +101,7 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
                 break;
         }
 
-        Broadcast.publish(event, {uuid : item.uuid, type : item.type});
+        Broadcast.publish(evt, {uuid : item.uuid, type : item.type});
     }
 
     function deleteItem (item) {
@@ -113,6 +113,10 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
                 delete projects[item.uuid];
 
                 localStorage.setItem('projects', JSON.stringify(projects));
+
+                delete tasks[item.uuid];
+
+                localStorage.setItem('tasks', JSON.stringify(tasks));
 
                 break;
 
@@ -132,6 +136,10 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
         return projects[uuid];
     }
 
+    function getTaskByUUID (uuid) {
+        return tasks[currentProjectUUID][uuid];
+    }
+
     return {
 
         EVENTS : EVENT,
@@ -141,6 +149,7 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
         saveItem : saveItem,
         deleteItem : deleteItem,
         getProjectByUUID : getProjectByUUID,
+        getTaskByUUID : getTaskByUUID,
 
         getProjects : function () {
             return projects;
@@ -164,10 +173,6 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
 
         setCurrentTaskUUID : function (uuid) {
             currentTaskUUID = uuid;
-        },
-
-        getTaskByUUID : function (uuid) {
-            return tasks[currentProjectUUID][uuid];
         }
     };
 
