@@ -1,11 +1,10 @@
 // define dependent files
-define(['utilities/DOM', 'utilities/Broadcast', 'utilities/Templates', 'utilities/Strings', 'managers/Data', 'components/Dialog', 'components/Info', 'components/List', 'components/ListItem', 'elements/TextInput', 'elements/Textarea'], 
-    function(DOM, Broadcast, Templates, Strings, DataManager, UIDialog, UIInfo, UIList, UIListItem, UITextInput, UITextarea) {
+define(['utilities/DOM', 'utilities/Broadcast', 'utilities/Templates', 'utilities/Strings', 'managers/Data', 'components/Dialog', 'components/Info', 'components/List', 'components/ListItem', 'elements/TextInput', 'elements/Textarea', 'elements/Notification'], 
+    function(DOM, Broadcast, Templates, Strings, DataManager, UIDialog, UIInfo, UIList, UIListItem, UITextInput, UITextarea, UINotification) {
 
     'use strict';
 
-    var Main,
-        projectsList,
+    var projectsList,
         createProjectDialog,
         elNewProjectBtn,
         tasksList,
@@ -13,6 +12,7 @@ define(['utilities/DOM', 'utilities/Broadcast', 'utilities/Templates', 'utilitie
         elWrapper,
         elTaskInfo,
         elNewTaskBtn,
+        undoNotification,
         projects,
         tasks,
         currentProjectUUID,
@@ -93,14 +93,17 @@ define(['utilities/DOM', 'utilities/Broadcast', 'utilities/Templates', 'utilitie
 
         createTaskDialog = UIDialog.create(dialog_desc);
 
-        elWrapper.appendChild(createProjectDialog.el);
-        elWrapper.appendChild(createTaskDialog.el);
-
         elNewTaskBtn = document.querySelector('#new-task-btn');
 
         elNewTaskBtn.addEventListener('click', onNewTask);
 
         elTaskInfo = UIInfo.create();
+
+        undoNotification = UINotification.create('Undo', onUndo);
+
+        elWrapper.appendChild(createProjectDialog.el);
+        elWrapper.appendChild(createTaskDialog.el);
+        elWrapper.appendChild(undoNotification.el);
 
         projects = {};
 
@@ -127,6 +130,15 @@ define(['utilities/DOM', 'utilities/Broadcast', 'utilities/Templates', 'utilitie
 
         createProjectDialog.hide();
         createTaskDialog.hide();
+    }
+
+    function onUndo () {
+
+        var data = DataManager.undo(),
+            list = data.type === DataManager.TYPES.PROJECT ? projectsList : tasksList,
+            item = data.item;
+
+        addItem(item, list);
     }
 
     function onItemSaved (data) {
@@ -371,12 +383,12 @@ define(['utilities/DOM', 'utilities/Broadcast', 'utilities/Templates', 'utilitie
                 break;
         }
 
+        undoNotification.show();
+
         DataManager.deleteItem(item);
     }
 
-    Main = {
+    return {
         init : init
     };
-
-    return Main;
 });

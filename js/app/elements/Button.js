@@ -23,9 +23,14 @@ define(function() {
         this.el = document.createElement('button');
         this.el.classList.addMany('ui-btn ui-btn--button ' + this.type + ' ' + this.alignment);
 
+        this.elLabel = document.createElement('span');
+        this.elLabel.classList.add('ui-btn--label');
+
         if (this.label !== undefined) {
-            this.el.textContent = this.label;
+            this.elLabel.textContent = this.label;
         }
+
+        this.el.appendChild(this.elLabel);
 
         this.el.addEventListener('click', this.onClick.bind(this));
     }
@@ -38,6 +43,7 @@ define(function() {
     Button.prototype.destroy = function() {
 
         this.el = undefined;
+        this.elLabel = undefined;
         this.type = undefined;
         this.callback = undefined;
     }

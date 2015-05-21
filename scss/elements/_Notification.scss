@@ -1,0 +1,36 @@
+.ui-notification {
+    
+    position: absolute;
+    height: 40px;
+    min-width: 300px;
+    top: 20px;
+    right: 20px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    opacity: 0;
+    transition: opacity 500ms ease-out;
+    display: table;
+    z-index: 1000;
+
+    .ui-notification--label {
+        
+        font-family: $textFontStack;
+        font-size: 1em;
+        line-height: 1.1em;
+        text-decoration: none;
+        text-align: center;
+        vertical-align: middle;
+        display: table-cell;
+    }
+
+    .ui-notification--buttons {
+
+        vertical-align: middle;
+        display: table-cell;
+    }
+
+    &.show {
+
+        opacity: 1;
+    }
+}

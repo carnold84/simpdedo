@@ -2,15 +2,18 @@
    General Classes
    ========================================================================== */
 * {
+
     box-sizing: border-box;
 }
 
 body {
+
     font-size: 14px;
     background-color: $background;
 }
 
 h1, h2, h3 {
+
     font-family: $titleFontStack;
     font-weight: normal;
     padding: 0;
@@ -18,20 +21,14 @@ h1, h2, h3 {
 }
 
 #wrapper {
+
     position: absolute;
     width: 100%;
     height: 100%;
 }
 
-/*#header {
-    width: 100%;
-    height: 40px;
-    float: left;
-    background-color: #387498;
-    border-bottom: #325a73 solid 1px;
-}*/
-
 #header {
+
     width: 100%;
     height: 40px;
     float: left;
@@ -40,12 +37,15 @@ h1, h2, h3 {
 }
 
 #main {
+
     width: 100%;
     height: calc(100% - 40px);
-    float: left;
+    display: flex;
+    flex-direction: row;
 }
 
 .main-title {
+
     font-size: 17px;
     text-transform: uppercase;
     color: $text-light-grey;
@@ -54,7 +54,7 @@ h1, h2, h3 {
 }
 
 .column-1, .column-2, .column-3 {
-    float: left;
+
     height: 100%;
 
     .list {
@@ -63,12 +63,14 @@ h1, h2, h3 {
 }
 
 .column-1, .column-2 {
-    width: $column-narrow;
+
+    flex-basis: $column-narrow;
 }
 
 .column-1 {
 
     background-color: $column-1;
+    order: 1;
 
     .column-header {
 
@@ -80,6 +82,7 @@ h1, h2, h3 {
 .column-2 {
 
     background-color: $column-2;
+    order: 2;
 
     .column-header {
 
@@ -90,8 +93,9 @@ h1, h2, h3 {
 
 .column-3 {
 
-    width: calc(100% - #{$column-narrow * 2});
     background-color: $column-3;
+    order: 3;
+    flex-grow: 1;
 
     .column-header {
 
@@ -102,32 +106,26 @@ h1, h2, h3 {
 
 .column-header {
 
-    position: relative;
     width: 100%;
     height: 40px;
-    float: left;
     background-color: $column-1-header;
     border-bottom: $column-1-header solid 1px;
+    display: flex;
+    flex-direction: row;
 
-    h3 {
+    .column-header--title {
 
         color: $header-text-colour;
         font-size: 1rem;
-        float: left;
-        margin: 10px 0 0 15px;
+        padding: 10px 0 0 15px;
+        flex-grow: 1;
+        order: 2;
     }
 
-    .ui-button {
+    .column-header--nav {
 
-        color: $column-header-btn-text-colour;
-        float: right;
-        margin: 7px 7px 0 0;
-        background-color: $column-header-btn-bg-colour;
-
-        :hover {
-            
-            background-color: $column-header-btn-bg-colour_HOVER;
-        }
+        padding: 7px 7px 0 0;
+        order: 2;
     }
 }
 

@@ -14,6 +14,7 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
         },
         projects,
         tasks,
+        undo,
         currentProjectUUID,
         currentTaskUUID;
 
@@ -110,6 +111,11 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
 
             case TYPE.PROJECT :
 
+                undo = {
+                    project : projects[item.uuid],
+                    project_tasks : tasks[item.uuid]
+                };
+
                 delete projects[item.uuid];
 
                 localStorage.setItem('projects', JSON.stringify(projects));
@@ -122,7 +128,12 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
 
             case TYPE.TASK :
 
-                delete tasks[item.uuid];
+                undo = {
+                    project : projects[currentProjectUUID],
+                    task : tasks[currentProjectUUID][item.uuid]
+                };
+
+                delete tasks[currentProjectUUID][item.uuid];
 
                 localStorage.setItem('tasks', JSON.stringify(tasks));
 
@@ -130,6 +141,46 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
         }
 
         return true;
+    }
+
+    function undo () {
+
+        var project = undo.project,
+            project_tasks = undo.project_tasks,
+            task = undo.task,
+            data = {};
+
+        if (task !== undefined) {
+
+            if (project) {
+
+                tasks[project.uuid][task.uuid] = task;
+
+                data.item = task;
+
+                data.type = TYPE.TASK;
+
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+        } else if (project !== undefined) {
+
+            projects[project.uuid] = project;
+
+            localStorage.setItem('projects', JSON.stringify(projects));
+
+            if (project_tasks !== undefined) {
+
+                tasks[project.uuid] = project_tasks;
+            }
+
+            data.item = project;
+
+            data.type = TYPE.PROJECT;
+
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+
+        return data;
     }
 
     function getProjectByUUID (uuid) {
@@ -148,6 +199,7 @@ define(['utilities/Utils', 'utilities/Broadcast'], function(Utils, Broadcast) {
         init : init,
         saveItem : saveItem,
         deleteItem : deleteItem,
+        undo : undo,
         getProjectByUUID : getProjectByUUID,
         getTaskByUUID : getTaskByUUID,
 
